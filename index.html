@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+	<meta charset="UTF-8">
+	<title>Navbar</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}	
+		ul {
+			list-style: none;
+		}
+		.nav-main {
+			display: flex;
+			justify-content: space-between;
+			border-bottom: 1px solid black;
+			line-height: 45px;
+		}
+		.nav-main li {
+			text-align: center;
+			flex-grow: 1;
+			position: relative;
+			
+			background-color: #ccc;
+		}
+		.nav-main  li:hover {
+			background-color: #333;
+		}
+		.nav-main > li:not(:last-of-type){
+			border-right: 1px solid black;
+		}
+		.nav-item-sublist {
+			display: block;
+			position: absolute;
+			width: 100%;
+			z-index: -1;
+			top: -500%;
+		}
+		.nav-item-sublist li:not(:last-of-type) {
+			border-bottom: 1px solid;
+		}
+		.subitem-list {
+			display: block;
+			position: absolute;
+			left: 220px;
+			width: 100%;
+			top: -700%;
+		}
+	</style>
+</head>
+<body>
+	<ul class="nav-main">
+		<li class="nav-item">Home</li>
+		<li class="nav-item">Products
+
+			<ul class="nav-item-sublist">
+				<li class="nav-item-subitem">Product Cat 1</li>
+				<li class="nav-item-subitem">Product Cat 2
+				<ul class="subitem-list">
+					<li class="subitem-list-item">Product Sub Cat 1</li>
+					<li class="subitem-list-item">Product Sub Cat 2</li>
+				</ul></li>
+				<li class="nav-item-subitem">Product Cat 3</li>
+				<li class="nav-item-subitem">Product Cat 4</li>
+			</ul>
+
+		</li>
+		<li class="nav-item">About</li>
+		<li class="nav-item">Contacts</li>
+		<li class="nav-item">Feedback</li>
+	</ul>
+
+	<script>
+		$('.nav-item').hover(function () {
+			$(this).find('.nav-item-sublist').stop(true).animate({top: '100%'});
+			$('.nav-item-subitem').hover(function() {
+				$(this).find('.subitem-list').stop(true).animate({top: '0%'});
+			},
+			function() {
+				$(this).find('.subitem-list').stop(true).delay(1000).animate({top: '-600%'});
+			});
+		}, 
+		function () {
+			$(this).find('.nav-item-sublist').stop(true).delay(1000).animate({top: '-500%'});
+		});
+
+		
+	</script>
+</body>
+</html>
